@@ -1,49 +1,37 @@
 ## Getting Started
 
+Ethereum Sepolia Test-net 
+ERC721
+0xD8eAD15E0a16Ce9d4Fbd52ECf9587c1f6DfC3Aa8
 
+Account
+0x91E234203dc474074c751fBb1f5f561cF6081837
 
-Create a project using this example:
+NFT 1 With Officail Registery
+0xaBe981B88239c95Cd5858f4169E967f06aFeA60A
 
-```bash
-npx thirdweb create --contract --template hardhat-javascript-starter
-```
+Official Registery
+0x000000006551c19487814612e58FE06813775758
 
-You can start editing the page by modifying `contracts/Contract.sol`.
+Registery
+0x0886d99AD0fbF14C1062dd38d4C7C116f32e0149
 
-To add functionality to your contracts, you can use the `@thirdweb-dev/contracts` package which provides base contracts and extensions to inherit. The package is already installed with this project. Head to our [Contracts Extensions Docs](https://portal.thirdweb.com/contractkit) to learn more.
+ERC20
+0x5AeeDc288D4056d2909a5EF9c669c23b1435de79
 
-## Building the project
+Elysium Testnet
+https://blockscout.atlantischain.network/
 
-After any changes to the contract, run:
+Registery
+0x1d3Ecb3A35373eC295d1042B0bCC5413B903aB17
 
-```bash
-npm run build
-# or
-yarn build
-```
+ERC721
+0x8bB3b7E29E4bAc42ebeC7f22E1613231458aB9C9
 
-to compile your contracts. This will also detect the [Contracts Extensions Docs](https://portal.thirdweb.com/contractkit) detected on your contract.
+Account Implimentation
+0x5AeeDc288D4056d2909a5EF9c669c23b1435de79
 
-## Deploying Contracts
+Another Repos:
+https://github.com/kk-im/tba-tutorial-pinata
 
-When you're ready to deploy your contracts, just run one of the following command to deploy you're contracts:
-
-```bash
-npm run deploy
-# or
-yarn deploy
-```
-
-## Releasing Contracts
-
-If you want to release a version of your contracts publicly, you can use one of the followings command:
-
-```bash
-npm run release
-# or
-yarn release
-```
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+https://github.dev/upendra-eth/erc6551-token-bound-account/blob/main/contracts/contracts/access/Ownable2Step.sol
