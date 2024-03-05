@@ -1,3 +1,5 @@
+require('@matterlabs/hardhat-zksync-solc');
+
 module.exports = {
   defaultNetwork: 'sepolia',
   networks: {
@@ -26,6 +28,3 @@ module.exports = {
     timeout: 40000,
   },
 };
-
-// https://sepolia.drpc.org
-// 115599ed6967fb544e58d739ea5ed29aa900b45d9335ae61421538ee6ae6151d

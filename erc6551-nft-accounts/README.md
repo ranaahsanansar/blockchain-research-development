@@ -35,3 +35,9 @@ Another Repos:
 https://github.com/kk-im/tba-tutorial-pinata
 
 https://github.dev/upendra-eth/erc6551-token-bound-account/blob/main/contracts/contracts/access/Ownable2Step.sol
+
+
+https://github.com/erc6551/reference/blob/main/src/examples/upgradeable/ERC6551AccountUpgradeable.sol
+
+Salt
+0x0000000000000000000000000000000000000000000000000000000000000001
