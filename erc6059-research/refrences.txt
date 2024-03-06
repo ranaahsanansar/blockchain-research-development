@@ -1,0 +1,9 @@
+Refrence EIP-6059
+https://eips.ethereum.org/EIPS/eip-6059
+
+Refrence Article
+https://ethereum-magicians.org/t/eip-6059-parent-governed-nestable-non-fungible-tokens/11914
+
+Refernce Implementation
+https://github.com/rmrk-team/EIPs/blob/nestable-eip/assets/eip-6059/contracts/NestableToken.sol
+
