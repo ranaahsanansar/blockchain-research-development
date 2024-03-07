@@ -1066,7 +1066,7 @@ contract NestableToken is Context, IERC165, IERC721, INestable {
         uint256 childId,
         bool isPending,
         bytes memory data
-    ) internal virtual {
+    ) internal  virtual {
         Child memory child;
         if (isPending) {
             child = pendingChildOf(tokenId, childIndex);
@@ -1075,13 +1075,13 @@ contract NestableToken is Context, IERC165, IERC721, INestable {
         }
         _checkExpectedChild(child, childAddress, childId);
 
-        _beforeTransferChild(
-            tokenId,
-            childIndex,
-            childAddress,
-            childId,
-            isPending
-        );
+        // _beforeTransferChild(
+        //     tokenId,
+        //     childIndex,
+        //     childAddress,
+        //     childId,
+        //     isPending
+        // );
 
         if (isPending) {
             _removeChildByIndex(_pendingChildren[tokenId], childIndex);
@@ -1092,11 +1092,10 @@ contract NestableToken is Context, IERC165, IERC721, INestable {
 
         if (to != address(0)) {
             if (destinationId == 0) {
-                IERC721(childAddress).safeTransferFrom(
+                IERC721(childAddress).transferFrom(
                     address(this),
                     to,
-                    childId,
-                    data
+                    childId
                 );
             } else {
                 // Destination is an NFT
@@ -1117,13 +1116,13 @@ contract NestableToken is Context, IERC165, IERC721, INestable {
             childId,
             isPending
         );
-        _afterTransferChild(
-            tokenId,
-            childIndex,
-            childAddress,
-            childId,
-            isPending
-        );
+        // _afterTransferChild(
+        //     tokenId,
+        //     childIndex,
+        //     childAddress,
+        //     childId,
+        //     isPending
+        // );
     }
 
     function _checkExpectedChild(
@@ -1411,13 +1410,13 @@ contract NestableToken is Context, IERC165, IERC721, INestable {
      * @param isPending A boolean value signifying whether the child token is being transferred from the pending child
      *  tokens array (`true`) or from the active child tokens array (`false`)
      */
-    function _beforeTransferChild(
-        uint256 tokenId,
-        uint256 childIndex,
-        address childAddress,
-        uint256 childId,
-        bool isPending
-    ) internal virtual {}
+    // function _beforeTransferChild(
+    //     uint256 tokenId,
+    //     uint256 childIndex,
+    //     address childAddress,
+    //     uint256 childId,
+    //     bool isPending
+    // ) internal virtual {}
 
     /**
      * @notice Hook that is called after a child is transferred from a given child token array of a given token.
