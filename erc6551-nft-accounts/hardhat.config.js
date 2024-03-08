@@ -1,9 +1,13 @@
 module.exports = {
-  defaultNetwork: 'sepolia',
+  defaultNetwork: 'elysium',
   networks: {
     hardhat: {},
     sepolia: {
       url: 'https://eth-sepolia.g.alchemy.com/v2/BrkTuD9WoO3ACphJ3Iv8M1TvnVnvTX9g',
+      accounts: ['115599ed6967fb544e58d739ea5ed29aa900b45d9335ae61421538ee6ae6151d'],
+    },
+    elysium: {
+      url: 'https://rpc.atlantischain.network/',
       accounts: ['115599ed6967fb544e58d739ea5ed29aa900b45d9335ae61421538ee6ae6151d'],
     },
   },

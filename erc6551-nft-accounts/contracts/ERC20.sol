@@ -6,14 +6,14 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
-contract AhsanCoin is ERC20, Ownable, ERC20Permit {
-    constructor(address initialOwner)
-        ERC20("AhsanCoin", "ASNC")
-        Ownable(initialOwner)
-        ERC20Permit("AhsanCoin")
-    {}
+// contract AhsanCoin is ERC20, Ownable, ERC20Permit {
+//     constructor(address initialOwner)
+//         ERC20("AhsanCoin", "ASNC")
+//         Ownable(initialOwner)
+//         ERC20Permit("AhsanCoin")
+//     {}
 
-    function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
-    }
-}
+//     function mint(address to, uint256 amount) public onlyOwner {
+//         _mint(to, amount);
+//     }
+// }
