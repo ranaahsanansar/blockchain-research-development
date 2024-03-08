@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ThirdwebModule } from './thirdweb/thirdweb.module';
+import { Erc6059Module } from './erc6059/erc6059.module';
 
 @Module({
   imports: [
@@ -14,9 +16,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [],
+      autoLoadEntities: true,
       synchronize: true,
     }),
+    ThirdwebModule,
+    Erc6059Module,
   ],
   controllers: [AppController],
   providers: [AppService],
