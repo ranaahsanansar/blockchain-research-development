@@ -7,26 +7,26 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Nft6059Owners } from './nft-owners';
+import { Nft6059OwnersEntity } from './nft-owners';
 
 @Entity('nft_6059')
-export class Nft6059 {
+export class Nft6059Entity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   tokenId: number;
 
-  @Column()
+  @Column({ nullable: true })
   nft_name: string;
 
-  @Column()
+  @Column({ nullable: true })
   nft_uri: string;
 
   @Column({ default: false })
   isChild: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   tx_hash: string;
 
   @Column({ default: false })
@@ -40,7 +40,7 @@ export class Nft6059 {
 
   // relations ----------
 
-  @OneToOne(() => Nft6059Owners, (owner) => owner.nft_6059)
+  @OneToOne(() => Nft6059OwnersEntity, (owner) => owner.nft_6059)
   @JoinColumn()
-  owner: Nft6059Owners;
+  owner: Nft6059OwnersEntity;
 }

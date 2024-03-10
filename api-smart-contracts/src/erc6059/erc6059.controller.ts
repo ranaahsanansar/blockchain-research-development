@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get } from '@nestjs/common';
 import { MintNftDto } from './dto/mint-nft.dto';
 import { Erc6059Service } from './erc6059.service';
 import { ApiTags } from '@nestjs/swagger';
@@ -11,5 +11,10 @@ export class Erc6059Controller {
   @Post('mint')
   async mint(@Body() body: MintNftDto): Promise<any> {
     return await this.erc6059Service.mint(body);
+  }
+
+  @Get('get-all-erc6059')
+  async getAllErc6059(): Promise<any> {
+    return await this.erc6059Service.getAllErc6059();
   }
 }
