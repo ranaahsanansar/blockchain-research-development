@@ -6,7 +6,7 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
-import { MintNftDto } from './dto/mint-nft.dto';
+import { MintNftDto, NestMintNft } from './dto/mint-nft.dto';
 import { Erc6059Service } from './erc6059.service';
 import { ApiTags, ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -26,5 +26,15 @@ export class Erc6059Controller {
   @Get('get-all-erc6059')
   async getAllErc6059(): Promise<any> {
     return await this.erc6059Service.getAllErc6059();
+  }
+
+  @Post('nest-mint')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  async nestMint(
+    @Body() body: NestMintNft,
+    @UploadedFile() file,
+  ): Promise<any> {
+    return await this.erc6059Service.nestMint(body, file);
   }
 }

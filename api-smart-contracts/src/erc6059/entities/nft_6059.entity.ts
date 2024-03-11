@@ -23,11 +23,14 @@ export class Nft6059Entity {
   @Column({ nullable: true })
   nft_uri: string;
 
-  @Column({ default: false })
-  isChild: boolean;
+  // @Column({ default: false })
+  // isChild: boolean;
 
   @Column({ nullable: true })
   tx_hash: string;
+
+  @Column({ nullable: false })
+  contract_address: string;
 
   @Column({ default: false })
   isMinted: boolean;

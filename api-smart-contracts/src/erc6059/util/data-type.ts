@@ -12,3 +12,12 @@ export interface CustomFile {
   size: number;
   buffer: Buffer;
 }
+
+export type GenerateNftObjFunParam = {
+  nftName: string;
+  tokenId: number;
+  to: string;
+  nftUrl: string;
+  tx_hash: string;
+  contract_address: string;
+};

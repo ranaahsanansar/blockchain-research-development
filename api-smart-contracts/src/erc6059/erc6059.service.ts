@@ -6,18 +6,20 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ThirdwebService } from 'src/thirdweb/thirdweb.service';
-import { MintNftDto } from './dto/mint-nft.dto';
+import { MintNftDto, NestMintNft } from './dto/mint-nft.dto';
 import { contractAddressesUtil } from 'src/utils/contract-address';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Nft6059Entity } from './entities/nft_6059.entity';
 import { Nft6059OwnersEntity } from './entities/nft-owners';
 import { Repository } from 'typeorm';
-import { CustomFile } from './util/data-type';
+import { CustomFile, GenerateNftObjFunParam } from './util/data-type';
 import { BackblazeService } from 'src/backblaze/backblaze.service';
+import { generateNewNftandOwner } from './util/helper-functions';
 
 @Injectable()
 export class Erc6059Service {
   private readonly logger = new Logger(Erc6059Service.name);
+  private readonly contractAddress = contractAddressesUtil.ERC_6059Sepolia;
 
   constructor(
     @Inject(ThirdwebService) private thirdWebSdk: ThirdwebService,
@@ -58,6 +60,25 @@ export class Erc6059Service {
     return uploadResponse.data;
   }
 
+  private async uploadToBackblazeAndSaveInDb(
+    file: CustomFile,
+    nftData: GenerateNftObjFunParam,
+    isChild: boolean,
+  ) {
+    // upload the file to backblaze
+    console.log('Uploading');
+    const uploadResponse = await this.uploadFile(file);
+    const imageUrl = process.env.BUCKET_BASE_URL + uploadResponse.fileName;
+    nftData.nftUrl = imageUrl;
+
+    // save the nft to db
+    const { nft, owner } = generateNewNftandOwner(nftData);
+    // nft.isChild = isChild;
+
+    await this.nft6059Owners.save(owner);
+    await this.nft6059.save(nft);
+  }
+
   async mint(body: MintNftDto, file: CustomFile): Promise<any> {
     try {
       // check if nft already exists
@@ -66,34 +87,59 @@ export class Erc6059Service {
         throw new HttpException('NFT already exists', HttpStatus.CONFLICT);
       }
 
-      // upload the file to backblaze
-      const uploadResponse = await this.uploadFile(file);
-      console.log(uploadResponse);
-
-      const imageUrl = process.env.BUCKET_BASE_URL + uploadResponse.fileName;
+      // Upload fiel and save in DB
+      const nftData: GenerateNftObjFunParam = {
+        nftName: body.nftName,
+        nftUrl: '',
+        to: body.to,
+        tokenId: body.tokenId,
+        tx_hash: null,
+        contract_address: this.contractAddress,
+      };
+      await this.uploadToBackblazeAndSaveInDb(file, nftData, false);
 
       // mint the nft
+      console.log('Miniting');
       const result = await this.thirdWebSdk.callContractFunction(
-        contractAddressesUtil.ERC_6059,
+        this.contractAddress,
         'mint',
         [body.to, body.tokenId],
       );
 
-      // save the nft to db
-      const nft = new Nft6059Entity();
-      nft.nft_name = body.nftName;
-      nft.nft_uri = imageUrl;
-      nft.tokenId = body.tokenId;
-      nft.tx_hash = result.receipt.transactionHash;
+      return result;
+    } catch (error) {
+      this.throwHttpException(error);
+    }
+  }
 
-      const owner = new Nft6059OwnersEntity();
-      owner.onwer_address = body.to;
+  async nestMint(body: NestMintNft, file: CustomFile): Promise<any> {
+    try {
+      if (await this.checkIfNftExists(body.newChildId)) {
+        throw new HttpException('NFT already exists', HttpStatus.CONFLICT);
+      }
 
-      await this.nft6059Owners.save(owner);
+      const parentNft = await this.nft6059.findOne({
+        where: { tokenId: body.parentId },
+      });
 
-      nft.owner = owner;
+      const nftData: GenerateNftObjFunParam = {
+        nftName: body.childNftName,
+        nftUrl: '',
+        to: parentNft.contract_address,
+        tokenId: body.newChildId,
+        tx_hash: null,
+        contract_address: this.contractAddress,
+      };
 
-      await this.nft6059.save(nft);
+      await this.uploadToBackblazeAndSaveInDb(file, nftData, true);
+
+      // mint the nft
+      console.log('Nest Miniting');
+      const result = await this.thirdWebSdk.callContractFunction(
+        this.contractAddress,
+        'nestMint',
+        [parentNft.contract_address, body.newChildId, body.parentId],
+      );
       return result;
     } catch (error) {
       this.throwHttpException(error);

@@ -1,5 +1,5 @@
 module.exports = {
-  defaultNetwork: 'elysium',
+  defaultNetwork: 'sepolia',
   networks: {
     hardhat: {},
     sepolia: {
