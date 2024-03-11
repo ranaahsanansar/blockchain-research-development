@@ -10,6 +10,6 @@ export class MintNftDto {
   @ApiProperty({ description: 'Name of nft' })
   nftName: string;
 
-  @ApiProperty({ description: 'URI of nft' })
-  nftUri: string;
+  @ApiProperty({ type: 'string', format: 'binary' })
+  file: any;
 }

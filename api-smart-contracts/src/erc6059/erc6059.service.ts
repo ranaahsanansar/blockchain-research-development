@@ -4,7 +4,6 @@ import {
   Inject,
   Injectable,
   Logger,
-  NotFoundException,
 } from '@nestjs/common';
 import { ThirdwebService } from 'src/thirdweb/thirdweb.service';
 import { MintNftDto } from './dto/mint-nft.dto';
@@ -13,6 +12,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Nft6059Entity } from './entities/nft_6059.entity';
 import { Nft6059OwnersEntity } from './entities/nft-owners';
 import { Repository } from 'typeorm';
+import { CustomFile } from './util/data-type';
+import { BackblazeService } from 'src/backblaze/backblaze.service';
 
 @Injectable()
 export class Erc6059Service {
@@ -24,6 +25,7 @@ export class Erc6059Service {
     private readonly nft6059: Repository<Nft6059Entity>,
     @InjectRepository(Nft6059OwnersEntity)
     private readonly nft6059Owners: Repository<Nft6059OwnersEntity>,
+    private readonly uploadB2: BackblazeService,
   ) {}
 
   private throwHttpException(error: any) {
@@ -42,12 +44,33 @@ export class Erc6059Service {
     return false;
   }
 
-  async mint(body: MintNftDto): Promise<any> {
+  private async uploadFile(file: CustomFile): Promise<any> {
+    await this.uploadB2.authorizeB2();
+    const bucketId = process.env.BUCKET_ID;
+    const fileName = `${Date.now()}-${file.originalname}`;
+    const fileData = file.buffer;
+    const uploadResponse = await this.uploadB2.uploadFile(
+      bucketId,
+      fileName,
+      fileData,
+    );
+    // console.log('File Uploaded to Backblaze B2: ' , uploadResponse);
+    return uploadResponse.data;
+  }
+
+  async mint(body: MintNftDto, file: CustomFile): Promise<any> {
     try {
       // check if nft already exists
+
       if (await this.checkIfNftExists(body.tokenId)) {
         throw new HttpException('NFT already exists', HttpStatus.CONFLICT);
       }
+
+      // upload the file to backblaze
+      const uploadResponse = await this.uploadFile(file);
+      console.log(uploadResponse);
+
+      const imageUrl = process.env.BUCKET_BASE_URL + uploadResponse.fileName;
 
       // mint the nft
       const result = await this.thirdWebSdk.callContractFunction(
@@ -59,18 +82,18 @@ export class Erc6059Service {
       // save the nft to db
       const nft = new Nft6059Entity();
       nft.nft_name = body.nftName;
-      nft.nft_uri = body.nftUri;
+      nft.nft_uri = imageUrl;
       nft.tokenId = body.tokenId;
       nft.tx_hash = result.receipt.transactionHash;
 
       const owner = new Nft6059OwnersEntity();
       owner.onwer_address = body.to;
 
+      await this.nft6059Owners.save(owner);
+
       nft.owner = owner;
 
-      await this.nft6059Owners.save(owner);
       await this.nft6059.save(nft);
-
       return result;
     } catch (error) {
       this.throwHttpException(error);
@@ -79,7 +102,15 @@ export class Erc6059Service {
 
   async getAllErc6059(): Promise<any> {
     try {
-      return await this.nft6059.find({ where: { isMinted: true } });
+      return await this.nft6059.find({
+        where: { isMinted: true },
+        relations: {
+          owner: true,
+        },
+        order: {
+          created_at: 'ASC',
+        },
+      });
     } catch (error) {
       this.throwHttpException(error);
     }

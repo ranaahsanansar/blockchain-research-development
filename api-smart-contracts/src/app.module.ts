@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ThirdwebModule } from './thirdweb/thirdweb.module';
 import { Erc6059Module } from './erc6059/erc6059.module';
+import { BackblazeModule } from './backblaze/backblaze.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { Erc6059Module } from './erc6059/erc6059.module';
     }),
     ThirdwebModule,
     Erc6059Module,
+    BackblazeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

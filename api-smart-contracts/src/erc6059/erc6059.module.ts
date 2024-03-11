@@ -6,10 +6,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Nft6059Entity } from './entities/nft_6059.entity';
 import { Nft6059OwnersEntity } from './entities/nft-owners';
 import { ERC6059ListnerService } from './samrt-contract-listner.service';
+import { BackblazeService } from 'src/backblaze/backblaze.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Nft6059Entity, Nft6059OwnersEntity])],
-  providers: [Erc6059Service, ThirdwebService, ERC6059ListnerService],
+  providers: [
+    Erc6059Service,
+    ThirdwebService,
+    ERC6059ListnerService,
+    BackblazeService,
+  ],
   controllers: [Erc6059Controller],
 })
 export class Erc6059Module {}

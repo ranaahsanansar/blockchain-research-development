@@ -27,6 +27,7 @@
     "@nestjs/swagger": "^7.3.0",
     "@nestjs/typeorm": "^10.0.2",
     "@thirdweb-dev/sdk": "^4.0.41",
+    "backblaze-b2": "^1.7.0",
     "ethers": "^5.7.2",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
