@@ -1,4 +1,4 @@
-astract contract NftGenetics {
+astract contract NftGenericts {
   struct NftGenetics {
     uint256 breedingPrice;
     string geneticsUri;
@@ -8,7 +8,7 @@ astract contract NftGenetics {
   mapping(uint256 => NftGenetics) public nftGenetics;
 
 
-  function _setNftGenetics(uint256 tokenId, NftGenetics memory genetics) internal {
+  function setNftGenetics(uint256 tokenId, NftGenetics memory genetics) internal {
     nftGenetics[tokenId] = genetics;
   }
 
