@@ -9,11 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 contract OyoCoin is ERC20, Ownable, ERC20Permit {
     constructor(
         address initialOwner
-    )
-        ERC20("OYO Coin", "OYO")
-        Ownable(initialOwner)
-        ERC20Permit("AhsanCoin")
-    {}
+    ) ERC20("OYO Coin", "OYO") Ownable(initialOwner) ERC20Permit("AhsanCoin") {}
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);

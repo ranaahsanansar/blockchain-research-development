@@ -1,0 +1,10 @@
+{
+  "featureOne": "one",
+  "featureTwo": "Two",
+  "genetics": {
+    "leftEye": "Yellow-A",
+    "rightEye": "Brown-B",
+    "height": 23,
+    "hairs": "red-A"
+  }
+}
