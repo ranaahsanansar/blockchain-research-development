@@ -953,11 +953,11 @@
 			]
 		},
 		"breeding-nft-usecase/contracts/breedingWith6551/OyoCoin.sol": {
-			"keccak256": "0x97886d96cf4399680f019657afbf2b2cc27c609c01d79f74a0bd8fb8e6edc3c9",
+			"keccak256": "0x1d0e4e2619b0f8ba1f329102213a1c655cb7f5248bf382d525d157a7ac1a1fd5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3773974c88e5c28cbf07aa694673208ffebd519cc53b0d3e954a79ddd850206f",
-				"dweb:/ipfs/QmRwrD859UzbaekqTTTdfVSNdRSGVi5jtoY1fnJvFgdWJm"
+				"bzz-raw://47ed1432bdad92da37111304a94b9089c55cff9e89c2cbe1d5eff6348ab381cc",
+				"dweb:/ipfs/QmZecU63u5zhsEFLHicsJZPz59L7vorqPczcLH3d39LDw1"
 			]
 		}
 	},

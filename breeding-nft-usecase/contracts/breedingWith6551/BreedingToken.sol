@@ -17,10 +17,13 @@ contract BreedingToken is ERC721, Genetics, Ownable {
         coinContractAddress = coinAddress;
     }
 
+    event Birth(uint256 indexed intrestedToken, uint256 indexed partner, uint256 indexed child, uint256 birthTime );
+
     function updateCoinAddress(address newAddress) public onlyOwner {
         coinContractAddress = newAddress;
     }
 
+    
     function safeMint(address to, string memory uri) public onlyOwner {
         uint256 tokenId = _nextTokenId++;
         _safeMint(to, tokenId);
@@ -55,11 +58,14 @@ contract BreedingToken is ERC721, Genetics, Ownable {
         );
         if (transferStatus == true) {
             uint256 tokenId = _nextTokenId++;
-            _safeMint(ownerOf(intrestedToken), tokenId);
+            uint256 birthTime = block.timestamp;
+            _mint(ownerOf(intrestedToken), tokenId);
             _setNftGenetics(
                 tokenId,
-                NftGenetics(0, block.timestamp, uriStorage)
+                NftGenetics(0, birthTime , uriStorage)
             );
+
+            emit Birth(intrestedToken , partnerToken, tokenId, birthTime);
         }
         return true;
     }

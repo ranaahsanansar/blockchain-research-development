@@ -15,7 +15,7 @@ import "./lib/MinimalReceiver.sol";
 import "./lib/ERC6551AccountLib.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract ERC6551Account is IERC165, IERC1271, IERC6551Account {
+contract Account is IERC165, IERC1271, IERC6551Account {
     uint256 public nonce;
 
     receive() external payable {}
