@@ -1485,11 +1485,11 @@
 			]
 		},
 		"breeding-nft-usecase/contracts/breedingWith6059/BreedingNft.sol": {
-			"keccak256": "0xf2a9351accc6ed7cac74f143e2bbc509adf7a87e4e5a908689c69ce1f7a1a919",
-			"license": "CC0-1.0",
+			"keccak256": "0x32e45ceae7e0a3af42f0dab91242166471db802129a6f24f46e4192bb14633ab",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://7dbb12029cd7a6a3a88b0cf914dbb42b95c013c8324c41606a92a01f76203d84",
-				"dweb:/ipfs/QmT2QRp62dzRtEjmHvfWTbH2uWUkTSi5djdEQJavR8ygme"
+				"bzz-raw://a87b2dee263f346d7800831733e0121df5fff62d3107365dd472ef8fd25379e0",
+				"dweb:/ipfs/QmNbLqSHYjjDDfR2TDe3TgFxuyebyBc87URr8mijvLaTZC"
 			]
 		},
 		"erc6059-research/INestable.sol": {

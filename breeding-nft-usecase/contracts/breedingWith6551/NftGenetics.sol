@@ -1,4 +1,8 @@
-astract contract NftGenericts {
+
+// SPDX-License-Identifier: CC0-1.0
+pragma solidity ^0.8.16;
+
+abstract contract NftGenericts {
   struct NftGenetics {
     uint256 breedingPrice;
     string geneticsUri;
