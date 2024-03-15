@@ -72,6 +72,11 @@
 							"type": "uint256"
 						},
 						{
+							"internalType": "uint256",
+							"name": "dateOfBirth",
+							"type": "uint256"
+						},
+						{
 							"internalType": "string",
 							"name": "geneticsUri",
 							"type": "string"
@@ -103,6 +108,11 @@
 				{
 					"internalType": "uint256",
 					"name": "breedingPrice",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "dateOfBirth",
 					"type": "uint256"
 				},
 				{
