@@ -1,9 +1,13 @@
 Can Nft have Multple Owners?
 https://medium.com/space-seven/can-nfts-really-have-multiple-owners-explained-41a0a68a2bdf
 
-Fractionalized NFT
+Fractionalized NFT 404 Standard
+https://www.kucoin.com/learn/web3/what-is-erc-404-token-standard
 https://medium.com/@arbenk/fractionalized-nft-f-nfts-all-that-you-need-to-know-46bc06ea486d
 https://coinmarketcap.com/academy/article/what-are-fractional-nfts-f-nfts-and-how-do-they-work
 
 ERC864 Standard
 https://github.com/ethereum/EIPs/issues/864
+
+Smart Contract Crypto Kitties
+https://gist.github.com/arpit/071e54b95a81d13cb29681407680794f

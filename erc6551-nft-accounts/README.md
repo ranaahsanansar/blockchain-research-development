@@ -4,7 +4,7 @@ Ethereum Sepolia Test-net
 ERC721
 0xD8eAD15E0a16Ce9d4Fbd52ECf9587c1f6DfC3Aa8
 
-Account
+Account-ERC6551
 0x91E234203dc474074c751fBb1f5f561cF6081837
 
 NFT 1 With Officail Registery
