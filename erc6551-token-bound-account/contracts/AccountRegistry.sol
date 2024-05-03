@@ -16,8 +16,15 @@ contract AccountRegistry is IRegistry {
      */
     address public immutable implementation;
 
+    // Mapping For marketplace
+    mapping(address => mapping (address=> uint256)) public accountToTokenId;
+    mapping(address => mapping (uint256=> address)) public tokenIdToAccount;
+
+    mapping(address => address) public accountToContractAddress;
+
     /**
      * @dev Emitted whenever new Address Created
+     
      */
     event AddressCreated(address indexed newAddress);
 
@@ -25,22 +32,7 @@ contract AccountRegistry is IRegistry {
         implementation = _implementation;
     }
 
-    /**
-     * @dev Creates the account for an ERC721 token. Will revert if account has already been deployed
-     *
-     * @param chainId the chainid of the network the ERC721 token exists on
-     * @param tokenCollection the contract address of the ERC721 token which will control the deployed account
-     * @param tokenId the token ID of the ERC721 token which will control the deployed account
-     * @return The address of the deployed ccount
-     */
-    function createAccount(
-        uint256 chainId,
-        address tokenCollection,
-        uint256 tokenId
-    ) external returns (address) {
-        return _createAccount(chainId, tokenCollection, tokenId);
-    }
-
+    
     /**
      * @dev Deploys the account for an ERC721 token. Will revert if account has already been deployed
      *
@@ -70,6 +62,14 @@ contract AccountRegistry is IRegistry {
         uint256 tokenId
     ) external view returns (address) {
         return _account(chainId, tokenCollection, tokenId);
+    }
+
+
+    //  TO get contract address or token id of a token bound address
+    function getContractAndtokenId(address _tokenBoundAddress) external view returns(uint256 _tokenId, address _contractAddress) {
+        address contractAddress = accountToContractAddress[_tokenBoundAddress];
+        uint256 tokenId = accountToTokenId[contractAddress][_tokenBoundAddress];
+        return (tokenId , contractAddress);
     }
 
     /**
@@ -103,6 +103,10 @@ contract AccountRegistry is IRegistry {
             encodedTokenData,
             salt
         );
+
+        accountToTokenId[tokenCollection][accountProxy] = tokenId;
+        tokenIdToAccount[tokenCollection][tokenId] = accountProxy;
+        accountToContractAddress[accountProxy] = tokenCollection;
 
         emit AccountCreated(accountProxy, tokenCollection, tokenId);
 

@@ -154,6 +154,14 @@ contract Account is IERC165, IERC1271, IAccount, MinimalReceiver {
         return _call(to, value, data);
     }
 
+    function callFunction(address targetContract,  bytes memory _callingData) public {
+    // bytes memory data = abi.encodeWithSignature("setVars(uint256)", value);
+    (bool success, ) = targetContract.call(_callingData);
+    require(success, "Call failed");
+  }
+
+//   function 
+
     // Transfer an ERC2O Token from this contract to another address
     function transferERC20Tokens(
         address tokenCollection,

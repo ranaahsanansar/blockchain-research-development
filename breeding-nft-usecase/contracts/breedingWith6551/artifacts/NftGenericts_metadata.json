@@ -1,0 +1,121 @@
+{
+	"compiler": {
+		"version": "0.8.24+commit.e11b9ed9"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getNftGenetics",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "breedingPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dateOfBirth",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "geneticsUri",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenUri",
+								"type": "string"
+							}
+						],
+						"internalType": "struct NftGenericts.NftGenetics",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "nftGenetics",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "breedingPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dateOfBirth",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "geneticsUri",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tokenUri",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"breeding-nft-usecase/contracts/breedingWith6551/NftGenetics.sol": "NftGenericts"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"breeding-nft-usecase/contracts/breedingWith6551/NftGenetics.sol": {
+			"keccak256": "0x881db2f5b9671e4e5422a781c9f3be783132a9372c440994038638fa4b9c01d2",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://e00005ebba90127a7be7b9a4d540ba59925a494bff7634202215230083186548",
+				"dweb:/ipfs/QmQ7CRxo3e7dEnfhXje5SovgjiftCaoHGD4qEqPUkbTy5u"
+			]
+		}
+	},
+	"version": 1
+}
